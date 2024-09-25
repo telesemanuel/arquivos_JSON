@@ -1,4 +1,3 @@
-# importa a biblioteca
 import json
 
 # classe ArquivoJson
@@ -9,37 +8,39 @@ class Manipulador:
                 {
                     'codigo': 0,
                     'nome': 'Admin',
-                    'cpf':'000.000.00-00',
+                    'cpf': '000.000.00-00',
                     'email': 'admin@admin.com',
                     'profissao': 'Administrador'
                 }
             ]
             
-            # serializando objeto python com json
-            json_dados = json.dumps(usuarios)
-            with open(f'{nome_arquivo}.json','w', encoding='utf-8') as f:
-              f.write(json_dados)
+            # serializando objeto Python com JSON
+            json_dados = json.dumps(usuarios, ensure_ascii=False)
+            with open(f'{nome_arquivo}.json', 'w', encoding='utf-8') as f:
+                f.write(json_dados)
             return f'{nome_arquivo}.json criado com sucesso'
                 
         except Exception as e:
             return f'Não foi possível criar o arquivo. {e}'
     
     def abrir_arquivo(self, nome_arquivo):
-        # desserializarndo objeto json em python
-        with open(f'{nome_arquivo}.json', 'r', encoding='utf-8') as f:
-            dados = json.load(f)
-        return dados
+        try:
+            # desserializando objeto JSON em Python
+            with open(f'{nome_arquivo}.json', 'r', encoding='utf-8') as f:
+                dados = json.load(f)
+            return dados
+        except Exception as e:
+            return f'Não foi possível abrir o arquivo. {e}'
     
     def salvar_dados(self, usuarios, nome_arquivo):
         try:
             with open(f"{nome_arquivo}.json", "w", encoding="utf-8") as f:
-                json.dump(usuarios, f)
-            return f"Dados gravados com sucesso."
+                json.dump(usuarios, f, ensure_ascii=False)
+            return "Dados gravados com sucesso."
         except Exception as e:
             return f"Não foi possível salvar os dados. {e}."
     
     # destrutor
     def __del__(self):
-        return f'Manipulador destruído'
-    
-    
+        print('Manipulador destruído')
+

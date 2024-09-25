@@ -10,7 +10,9 @@ class Pessoa:
     email: str
     profissao: str
     
-    #destrutor
-    
+    # destrutor
     def __del__(self):
-        return f'Objeto {self.nome} de codigo {self.codigo} foi destruído'
+        print(f'Objeto {self.nome} de código {self.codigo} foi destruído')
+
+# Exemplo de uso
+p = Pessoa(codigo=1, nome="João", cpf="123.456.789-00", email="joao@example.com", profissao="Desenvolvedor")
